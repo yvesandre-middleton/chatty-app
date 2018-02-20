@@ -25,18 +25,29 @@ class App extends Component {
     };
   }
 
-  inputText = (message) => {
-    this.setState({
-      messages: this.state.messages.concat([{
-        username: message.username,
-        content: message.content
-      }])
-    })
+  // inputText = (message) => {
+  //   this.setState({
+  //     messages: this.state.messages.concat([{
+  //       username: message.username,
+  //       content: message.content
+  //     }])
+  //   })
+  // }
+
+inputText = (message) => {
+    var msg = {
+      username: message.username,
+      content: message.content
+    };
+    console.log(msg);
+    this.webSocket.send(JSON.stringify(msg));
   }
 
   componentDidMount() {
 
-    this.webSocket = new WebSocket("ws://localhost:3001");
+   this.webSocket = new WebSocket("ws://localhost:3001");
+
+
     window.mySocket = this.webSocket;
     console.log("componentDidMount <App />");
     setTimeout(() => {
