@@ -7,22 +7,10 @@ import MessageList from './MessageList.jsx';
 class App extends Component {
   constructor(props) {
     super(props);
-    // this is the *only* time you should assign directly to state:
-    this.state = {
-      currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [
-        {
-          id: 1,
-          username: "Bob",
-          content: "Has anyone seen my marbles?",
-        },
-        {
-          id: 2,
-          username: "Anonymous",
-          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-        }
-      ]
-    };
+      this.state = {
+        currentUser: {name: "Bob"},
+        messages: [] // messages coming from the server will be stored here as they arrive
+      };
   }
 
   // inputText = (message) => {
@@ -41,13 +29,23 @@ inputText = (message) => {
     };
     console.log(msg);
     this.webSocket.send(JSON.stringify(msg));
-  }
+
+}
+
 
   componentDidMount() {
 
    this.webSocket = new WebSocket("ws://localhost:3001");
 
-
+    this.webSocket.onmessage = (event) => {
+    console.log("imcoming message:", event);
+    var msg = JSON.parse(event.data);
+    console.log("incoming message also:", msg);
+  // code to handle incoming message
+      this.setState({
+      messages: this.state.messages.concat([msg])
+      })
+    }
     window.mySocket = this.webSocket;
     console.log("componentDidMount <App />");
     setTimeout(() => {
