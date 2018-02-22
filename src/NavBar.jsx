@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import Message from './Message.jsx';
+import ChatBar from './ChatBar.jsx';
+import Message from './Message';
+import MessageList from './MessageList.jsx';
 
 class MessageList extends Component {
   render() {
     // console.log(this.props);
-    console.log("Rendering <MessageList/>");
+    console.log("Rendering <NavBar/>");
     return (
       <div className="messages">
         {
@@ -17,4 +19,3 @@ class MessageList extends Component {
     );
   }
 }
-export default MessageList;

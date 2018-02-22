@@ -3,12 +3,23 @@ import React, {Component} from 'react';
 class Message extends Component {
   render() {
     console.log("Rendering <Message/>");
-    return (
+
+    const { message } = this.props
+
+    if (message.type === 'postNotification') {
+      return (
+          <div className="message system">
+          { message.content }
+          </div>
+        )
+    } else {
+       return (
       <div className="message">
-      <span className="message-username">{this.props.message.username}</span>
-      <span className="message-content">{this.props.message.content}</span>
+        <span className="message-username">{ message.username }</span>
+        <span className="message-content">{ message.content }</span>
       </div>
-    );
+      )
+    }
   }
 }
 export default Message;

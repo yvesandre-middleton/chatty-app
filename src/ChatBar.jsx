@@ -24,12 +24,22 @@ class ChatBar extends Component {
     console.log("Rendering <ChatBar/>");
     return (
       <footer className="chatbar">
-        <input  className="chatbar-username" placeholder="Your Name (Optional)" defaultValue={this.props.currentUser.name} onChange={this._usernameChanged}/>
-        <input  className="chatbar-message" placeholder="Type a message and hit ENTER"
+        <input  className="chatbar-username"
+                placeholder="Your Name (Optional)"
+                defaultValue={this.props.currentUser.name}
+                onChange={this._usernameChanged}
+                onKeyPress={e => {
+                 if (e.key === 'Enter') {
+                    this._changeUsername(e.target.value);
+                  }
+                }}/>
+        <input  className="chatbar-message"
+          placeholder="Type a message and hit ENTER"
           onChange={this._messageChanged}
           onKeyPress={e => {
             if (e.key === 'Enter') {
               this._submitQuery();
+              this.clearInput();
             }
           }}
         />
@@ -38,9 +48,20 @@ class ChatBar extends Component {
     );
   }
 
+  _changeUsername= (user) => {
+    this.props.onSubmit(
+      {
+        type: 'postNotification',
+        content: `${user} changed his name to ${this.state.username}`
+      }
+    );
+  }
+
+
   _submitQuery = () => {
     this.props.onSubmit(
       {
+        type: 'postMessage',
         content: this.state.message,
         username: this.state.username
       }
