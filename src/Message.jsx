@@ -21,7 +21,7 @@ class Message extends Component {
        return (
       <div className="message">
         <span className="message-username" style={spanStyle} >{ message.username }</span>
-        <span className="message-content">{ message.content }</span>
+        <span className="message-content" dangerouslySetInnerHTML={{ __html: message.content }}></span>
       </div>
       )
     }
