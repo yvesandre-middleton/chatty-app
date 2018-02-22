@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
+import NavBar from './NavBar.jsx'
 
 
 
@@ -55,15 +56,16 @@ inputText = (message) => {
           this.setState({
           messages: this.state.messages.concat([msg])
           })
+          break;
       default:
         // show an error in the console if the message type is unknown
         throw new Error("Unknown event type " + msg.type);
     }
 
   // code to handle incoming message
-      this.setState({
-      messages: this.state.messages.concat([msg])
-      })
+      // this.setState({
+      // messages: this.state.messages.concat([msg])
+      // })
     }
 
     window.mySocket = this.webSocket;
@@ -85,10 +87,7 @@ inputText = (message) => {
     console.log("Rendering <App/>");
     return (
       <div>
-        <nav className="navbar">
-          <a href="/" className="navbar-brand">Chatty</a>
-          <p>{this.state.name}</p>
-        </nav>
+        <NavBar name={this.state.name}/>
         <MessageList messages={this.state.messages}/>
         <ChatBar currentUser={this.state.currentUser} messages={this.state.messages} onSubmit={this.inputText}/>
       </div>

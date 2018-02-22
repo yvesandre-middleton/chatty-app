@@ -7,17 +7,24 @@ class ChatBar extends Component {
     super(props)
 
     this.state = {
-      username: this.props.currentUser.name,
+      username: this.props.currentUser,
       message: ''
     }
   }
 
   _usernameChanged = e => {
-    this.setState({ username: e.target.value });
+    console.log("state from username", this.state)
+    let oldUsername = this.state.username
+    this.setState(
+      { newUsername: e.target.value,
+        username: oldUsername
+     });
   };
 
   _messageChanged = e => {
-    this.setState({ message: e.target.value });
+    console.log("state from message", this.state)
+    let username = this.state.newUsername
+    this.setState({ message: e.target.value, username: username });
   };
 
   render() {
@@ -39,7 +46,7 @@ class ChatBar extends Component {
           onKeyPress={e => {
             if (e.key === 'Enter') {
               this._submitQuery();
-              this.clearInput();
+              this._clearInput(e);
             }
           }}
         />
@@ -49,10 +56,12 @@ class ChatBar extends Component {
   }
 
   _changeUsername= (user) => {
+    let oldUsername = this.state.username
+    this.setState({ username: user })
     this.props.onSubmit(
       {
         type: 'postNotification',
-        content: `${user} changed his name to ${this.state.username}`
+        content: `${oldUsername} changed their name to ${user}`
       }
     );
   }
@@ -67,6 +76,12 @@ class ChatBar extends Component {
       }
     );
   }
+
+  _clearInput = (e) => {
+    this.setState({ message: '' });
+    e.target.value = ''
+  }
+
 };
 
 export default ChatBar;

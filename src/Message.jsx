@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+
+
 class Message extends Component {
   render() {
     console.log("Rendering <Message/>");
@@ -13,9 +15,12 @@ class Message extends Component {
           </div>
         )
     } else {
+      let spanStyle = {
+        color: this.props.colour
+      };
        return (
       <div className="message">
-        <span className="message-username">{ message.username }</span>
+        <span className="message-username" style={spanStyle} >{ message.username }</span>
         <span className="message-content">{ message.content }</span>
       </div>
       )
