@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
-import MessageList from './MessageList.jsx';
+import React, {Component} from 'react'
+import MessageList from './MessageList.jsx'
 
+// Constructor sets state in this component to help store username and message
 class ChatBar extends Component {
 
   constructor(props) {
@@ -13,22 +14,19 @@ class ChatBar extends Component {
   }
 
   _usernameChanged = e => {
-    console.log("state from username", this.state)
     let oldUsername = this.state.username
     this.setState(
       { newUsername: e.target.value,
         username: oldUsername
-     });
-  };
+     })
+  }
 
   _messageChanged = e => {
-    console.log("state from message", this.state)
     let username = this.state.newUsername
-    this.setState({ message: e.target.value, username: username });
-  };
-
+    this.setState({ message: e.target.value, username: username })
+  }
+  // Renders message and notification that user changed when enter clicked in each input
   render() {
-    console.log("Rendering <ChatBar/>");
     return (
       <footer className="chatbar">
         <input  className="chatbar-username"
@@ -37,7 +35,7 @@ class ChatBar extends Component {
                 onChange={this._usernameChanged}
                 onKeyPress={e => {
                  if (e.key === 'Enter') {
-                    this._changeUsername(e.target.value);
+                    this._changeUsername(e.target.value)
                   }
                 }}/>
         <input  className="chatbar-message"
@@ -45,16 +43,20 @@ class ChatBar extends Component {
           onChange={this._messageChanged}
           onKeyPress={e => {
             if (e.key === 'Enter') {
-              this._submitQuery();
-              this._clearInput(e);
+              if (!this.state.message) {
+                e.preventDefault()
+              } else {
+                this._submitQuery()
+                this._clearInput(e)
+              }
             }
           }}
         />
-      {/*<button onClick = {this.inputText.bind(this)}></button>*/}
       </footer>
-    );
+    )
   }
 
+  // Function to help submit and show notification that old username switched to new one
   _changeUsername= (user) => {
     let oldUsername = this.state.username
     this.setState({ username: user })
@@ -63,10 +65,10 @@ class ChatBar extends Component {
         type: 'postNotification',
         content: `${oldUsername} changed their name to ${user}`
       }
-    );
+    )
   }
 
-
+  // Function submits message
   _submitQuery = () => {
     this.props.onSubmit(
       {
@@ -74,14 +76,15 @@ class ChatBar extends Component {
         content: this.state.message,
         username: this.state.username
       }
-    );
+    )
   }
 
+  // Functions clears input after message is submitted
   _clearInput = (e) => {
-    this.setState({ message: '' });
+    this.setState({ message: '' })
     e.target.value = ''
   }
 
-};
+}
 
-export default ChatBar;
+export default ChatBar
