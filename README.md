@@ -4,11 +4,13 @@
 The Chatty App is a realtime web chat application that uses websockets to display messages for all users in realtime. It uses React to display a dynamic single page app in which state can be altered and http requests aren't needed to change and alter content.
 
 
-## Final Product
+## Final Product Screenshots
 
-!["This is the main page populated with tweets and with text in the compose box"](https://github.com/yvesandre-middleton/tweeter-app/blob/master/docs/mainscreen-textbox-has-input.png?raw=true)
-!["This is the main page populated with tweets and with the compose box folded up"](https://github.com/yvesandre-middleton/tweeter-app/blob/master/docs/compose-form-folded-up.png?raw=true)
-!["This is the main page populated with tweets and with an error message saying the tweet is too long. Notice the counter is also red when over 140 characters"](https://github.com/yvesandre-middleton/tweeter-app/blob/master/docs/message-too-long-error.png?raw=true)
+!["The main page when no one has said anything and one user is online"](https://github.com/yvesandre-middleton/chatty-app/blob/master/docs/Screen%20Shot%202018-02-23%20at%203.01.31%20PM.png?raw=true)
+!["The main page populated with messages from three users are online. The number of users active can be seen in the navbar"](https://github.com/yvesandre-middleton/chatty-app/blob/master/docs/Screen%20Shot%202018-02-23%20at%203.04.19%20PM.png?raw=true)
+!["The main page populated with messages and showing the ability to post gifs from giphy"](https://github.com/yvesandre-middleton/chatty-app/blob/master/docs/Screen%20Shot%202018-02-23%20at%203.04.33%20PM.png?raw=true)
+!["The main page populated with messages and showing the ability to post gifs from giphy and image urls. The notification that pops up when a user changes their name is also shown"](https://github.com/yvesandre-middleton/chatty-app/blob/master/docs/Screen%20Shot%202018-02-23%20at%203.06.53%20PM.png?raw=true)
+!["The main page populated with messages from one user showing how they can change their name and the colour of their username remains the same"](https://github.com/yvesandre-middleton/chatty-app/blob/master/docs/Screen%20Shot%202018-02-23%20at%203.11.22%20PM.png?raw=true)
 
 
 ### Chatty React App Dependencies
